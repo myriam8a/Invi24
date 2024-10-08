@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Interactiva</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ajuste del tamaño de la imagen */
+        #invitation-image {
+            width: 300px;  /* Cambiado a un tamaño más pequeño */
+            height: auto;  /* Mantiene la proporción de la imagen */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #slide-button, #continue-button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .final-message {
+            text-align: center;
+            font-size: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio -->
+    <audio id="invitation-audio" src="audio/invitacion.mp3.mp3" loop></audio>
+
+    <!-- Contenedor de la invitación -->
+    <div class="invitation-container" id="invitation-container">
+        <div class="message" id="initial-message">Slide for surprise</div>
+        <img id="invitation-image" src="img/invitacion1.jpeg" alt="Invitación">
+        <div class="message hidden" id="click-message">Click to Continue</div>
+        <button id="slide-button">Slide</button>
+        <button id="continue-button" class="hidden">Click</button> <!-- Botón para la segunda parte -->
+    </div>
+
+    <div class="final-message hidden" id="final-message">Favor de confirmar</div>
+
+    <script>
+        const invitationAudio = document.getElementById("invitation-audio");
+        const invitationImage = document.getElementById("invitation-image");
+        const slideButton = document.getElementById("slide-button");
+        const continueButton = document.getElementById("continue-button");
+        const initialMessage = document.getElementById("initial-message");
+        const clickMessage = document.getElementById("click-message");
+        const finalMessage = document.getElementById("final-message");
+
+        let currentImage = 1;
+        const totalFirstImages = 6;  // Las primeras 6 imágenes (chocolate)
+        const totalSecondImages = 5; // Las siguientes 5 imágenes
+
+        // Primera parte: Al hacer "Slide"
+        slideButton.addEventListener('click', function() {
+            slideButton.classList.add("hidden");
+            initialMessage.classList.add("hidden");
+            invitationAudio.play();  // Reproduce la música
+
+            // Cambia las primeras imágenes como una animación
+            const firstInterval = setInterval(function() {
+                currentImage += 1;
+                if (currentImage > totalFirstImages) {
+                    clearInterval(firstInterval);  // Detiene la secuencia de imágenes
+                    clickMessage.classList.remove("hidden");  // Muestra el mensaje de "Click"
+                    continueButton.classList.remove("hidden");  // Muestra el botón para continuar
+                } else {
+                    invitationImage.src = `img/invitacion${currentImage}.jpeg`;
+                }
+            }, 60);  // Cambia la imagen cada 300 milisegundos
+        });
+
+        // Segunda parte: Al hacer "Click" para continuar
+        continueButton.addEventListener('click', function() {
+            continueButton.classList.add("hidden");
+            clickMessage.classList.add("hidden");
+
+            // Reinicia el contador de imágenes para la segunda parte
+            currentImage = 1;
+
+            // Cambia las siguientes imágenes como una animación
+            const secondInterval = setInterval(function() {
+                currentImage += 1;
+                if (currentImage > totalSecondImages) {
+                    clearInterval(secondInterval);  // Detiene la secuencia de imágenes
+                    finalMessage.classList.remove("hidden");  // Muestra el mensaje final
+                } else {
+                    invitationImage.src = `img/invitacion${currentImage + totalFirstImages}.jpeg`; // Continuamos con las siguientes imágenes
+                }
+            }, 60);  // Cambia la imagen cada 300 milisegundos
+        });
+    </script>
+</body>
+</html>
