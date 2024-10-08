@@ -44,7 +44,7 @@
     <!-- Contenedor de la invitación -->
     <div class="invitation-container" id="invitation-container">
         <div class="message" id="initial-message">Slide for surprise</div>
-        <img id="invitation-image" src="img/invitacion1.jpeg" alt="Invitación">
+        <img id="invitation-image" src="img/invitation1.jpeg" alt="Invitatión">
         <div class="message hidden" id="click-message">Click to Continue</div>
         <button id="slide-button">Slide</button>
         <button id="continue-button" class="hidden">Click</button> <!-- Botón para la segunda parte -->
@@ -79,7 +79,7 @@
                     clickMessage.classList.remove("hidden");  // Muestra el mensaje de "Click"
                     continueButton.classList.remove("hidden");  // Muestra el botón para continuar
                 } else {
-                    invitationImage.src = `img/invitacion${currentImage}.jpeg`;
+                    invitationImage.src = `img/invitation${currentImage}.jpeg`;
                 }
             }, 60);  // Cambia la imagen cada 300 milisegundos
         });
@@ -99,7 +99,7 @@
                     clearInterval(secondInterval);  // Detiene la secuencia de imágenes
                     finalMessage.classList.remove("hidden");  // Muestra el mensaje final
                 } else {
-                    invitationImage.src = `img/invitacion${currentImage + totalFirstImages}.jpeg`; // Continuamos con las siguientes imágenes
+                    invitationImage.src = `img/invitation${currentImage + totalFirstImages}.jpeg`; // Continuamos con las siguientes imágenes
                 }
             }, 60);  // Cambia la imagen cada 300 milisegundos
         });
