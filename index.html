@@ -102,7 +102,20 @@
                     invitationImage.src = `img/invitation${currentImage + totalFirstImages}.jpeg`; // Continuamos con las siguientes imágenes
                 }
             }, 60);  // Cambia la imagen cada 300 milisegundos
+
         });
+
+      // Selecciona el audio
+  const audioElement = document.getElementById('invitation-audio');
+
+  // Escucha cuando el audio empieza a reproducirse
+  audioElement.addEventListener('play', function () {
+    // Programa el audio para detenerse después de 52 segundos (52000 milisegundos)
+    setTimeout(function () {
+      audioElement.pause(); // Pausa el audio
+      audioElement.currentTime = 0; // Opcional: vuelve al inicio del audio
+    }, 52000); // 52 segundos en milisegundos
+  });
     </script>
 </body>
 </html>
