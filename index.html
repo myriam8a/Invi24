@@ -50,7 +50,7 @@
         <button id="continue-button" class="hidden">Click</button> <!-- Botón para la segunda parte -->
     </div>
 
-    <div class="final-message hidden" id="final-message">Favor de confirmar</div>
+    <div class="final-message hidden" id="final-message">Confirma por mensaje</div> <!-- Actualizado el mensaje aquí -->
 
     <script>
         const invitationAudio = document.getElementById("invitation-audio");
@@ -81,7 +81,7 @@
                 } else {
                     invitationImage.src = `img/invitation${currentImage}.jpeg`;
                 }
-            }, 60);  // Cambia la imagen cada 300 milisegundos
+            }, 60);  // Cambia la imagen cada 60 milisegundos
         });
 
         // Segunda parte: Al hacer "Click" para continuar
@@ -101,21 +101,17 @@
                 } else {
                     invitationImage.src = `img/invitation${currentImage + totalFirstImages}.jpeg`; // Continuamos con las siguientes imágenes
                 }
-            }, 60);  // Cambia la imagen cada 300 milisegundos
-
+            }, 60);  // Cambia la imagen cada 60 milisegundos
         });
 
-      // Selecciona el audio
-  const audioElement = document.getElementById('invitation-audio');
-
-  // Escucha cuando el audio empieza a reproducirse
-  audioElement.addEventListener('play', function () {
-    // Programa el audio para detenerse después de 52 segundos (52000 milisegundos)
-    setTimeout(function () {
-      audioElement.pause(); // Pausa el audio
-      audioElement.currentTime = 0; // Opcional: vuelve al inicio del audio
-    }, 52000); // 52 segundos en milisegundos
-  });
+        // Controla el audio y su duración
+        const audioElement = document.getElementById('invitation-audio');
+        audioElement.addEventListener('play', function () {
+            setTimeout(function () {
+                audioElement.pause();  // Pausa el audio después de 52 segundos
+                audioElement.currentTime = 0;  // Vuelve al inicio
+            }, 52000);  // 52 segundos en milisegundos
+        });
     </script>
 </body>
 </html>
